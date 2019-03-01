@@ -1,0 +1,35 @@
+service: notifications-api
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  environment:
+    NODE_ENV: ${opt:stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+        - lambda:InvokeAsync
+      Resource: "*"
+  stage: dev
+  region: us-east-1
+  role: arn:aws:iam::379107115368:role/notifications-api-for-crons-lambda
+
+  vpc:
+    securityGroupIds: ${file(config/vpc-config-${opt:stage}.js):securityGroups}
+    subnetIds: ${file(config/vpc-config-${opt:stage}.js):subnets}
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy}'
+  order_server:
+    handler: index.handler
+    timeout: 500
+    events:
+      - http: 'GET /GetOrders/{to}/{from}'
+
+plugins:
+  - serverless-offline

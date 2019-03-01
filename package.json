@@ -1,0 +1,47 @@
+{
+  "name": "notifications-api",
+  "version": "1.0.0",
+  "description": "code for aws lambda scripts",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donfiftyidaho/notification-api.git"
+  },
+  "keywords": [
+    "notifications"
+  ],
+  "author": "Don Stefani <don.stefani@gmail.com> (http://donstefani.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/donfiftyidaho/notification-api/issues"
+  },
+  "homepage": "https://github.com/donfiftyidaho/notification-api#readme",
+  "dependencies": {
+    "aws-sdk": "^2.411.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.5.0",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.5",
+    "pug": "^2.0.3",
+    "require": "^2.4.20",
+    "sequelize": "^4.42.1",
+    "serverless": "^1.32.0",
+    "serverless-http": "^1.9.1",
+    "shipit": "^1.2.0",
+    "uuid": "^3.3.2",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "jest": "^24.1.0",
+    "serverless": "^1.32.0",
+    "serverless-offline": "^3.33.0"
+  }
+}
