@@ -37,7 +37,8 @@
     "serverless-http": "^1.9.1",
     "shipit": "^1.2.0",
     "uuid": "^3.3.2",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "uglify-js": ">=2.6.0"
   },
   "devDependencies": {
     "jest": "^24.1.0",
