@@ -1,0 +1,39 @@
+public function getOrderIdFromPoId($poId)
+	{
+		$sql = "SELECT parent_order_id AS order_id
+				FROM cart_purchase_orders
+				WHERE po_id = ".$poId;
+		$result = query($sql);
+		return $this->getColumnFromResult($result,"order_id");
+	}
+
+public function getOrderedProductId($poId,$orderedItemId)
+    {
+        //Christian 16-02-2015 edit the query.
+		$sql = "SELECT ordered_product_id FROM cart_purchase_order_items WHERE po_id = $poId AND ordered_item_id = $orderedItemId";
+        $result = query($sql);
+        return $this->getColumnFromResult($result,"ordered_product_id");    
+        
+    }
+
+public function getProductName($orderedProductId)  /*esta bien esa columna product_detail de la tabla ?*/
+    {   
+        $sql = "SELECT product_name FROM cart_ordered_products WHERE ordered_product_id = '$orderedProductId'";
+        $result = query($sql);
+        return $this->getColumnFromResult($result,"product_name");
+    }
+
+public function insertNote($orderId_p, $repName_p, $employeeId_p, $note_p, $noteDateTime_p)
+    {
+		if(!empty($orderId_p) && !empty($repName_p) && !empty($noteDateTime_p) && !empty($note_p))
+		{
+			$sql = "INSERT INTO cart_order_notes (order_id, rep_name, employee_id, note, note_date_time)
+					VALUES (".$orderId_p.",'".mysqli_real_escape_string($GLOBALS["databaseConnection"], $repName_p)."',".$employeeId_p.",'".mysqli_real_escape_string($GLOBALS["databaseConnection"], $note_p)."','".$noteDateTime_p."')";
+			$this->daoHandler->resetDAO();
+			$this->daoHandler->setQuery($sql);
+			$result = $this->daoHandler->executeQuery();
+			$insertedId = $this->daoHandler->getInsertedId();
+		}
+
+		return $insertedId;
+    }

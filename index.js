@@ -9,18 +9,20 @@ app.get('/', function(req, res) {
   res.send('Hello World!');
 });
 
+/** 
+ * for testing only
+ */
 app.get('/GetOrders/:to/:from', async function(req, res) {
   let to = req.params.to;
   let from = req.params.from;
 
   let db = new DB();
-  let result = db
+  db
     .GetOrders(to, from)
     .then(result => {
       res.status(200).json(result);
     })
-    .catch((err, result) => {
-      console.log(err);
+    .catch(err => {
       res.status(500).json(err);
     });
 });
